@@ -1,30 +1,24 @@
-const { params, listConfig } = require('./src/config/config')
-const getToken = require('./src/getToken/index')
-const sendMessage = require('./src/sendMessage/index')
+import { params, listConfig } from "./src/config/index.js";
+import getToken from "./src/getToken/index.js";
+import sendMessage from "./src/sendMessage/index.js";
 
 async function start() {
-  let access_token
+  const { data } = await getToken(params);
 
-  try {
-    access_token = await getToken(params)
-  } catch (error) {
-    console.log(error)
-    process.exit(0)
+  if (!data) {
+    console.log("!data");
+    return;
   }
-
-  sendMessage({
-    ...params,
-    access_token,
-    ...listConfig,
-  })
-    .then((res) => {
-      if (res.data && res.data.errcode) {
-        console.error('发送失败', res.data)
-        return
-      }
-      console.log('发送成功-请在微信上查看对应消息')
-    })
-    .catch((err) => console.error('发送失败', err))
+  console.log(listConfig.startDay);
+  // const { access_token } = data;
+  // const msgResponse = await sendMessage({
+  //   ...params,
+  //   access_token,
+  //   ...listConfig,
+  // });
+  // if (msgResponse) {
+  //   console.log(msgResponse);
+  // }
 }
 
-start()
+start();
