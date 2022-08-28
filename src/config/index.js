@@ -4,13 +4,19 @@ export const params = {
   appid: "wxc988a48df4f1fc38",
   secret: "4b959257ce9eaaff96f0d2440cc13c20",
   touser: "ozIIy6bivVnfJ0e1ydJGDWZZ3gZU",
-  template_id: "MvRjFukme2eXS_ahnqiOogr-5t8enRCVISSC2QY5WyM",
+  template_id: "X0LSCsPlDKaYWd3Bi-6SJ9XEjqyfoJS2mC1-G7U0SZI",
 };
 
-const startDay = new Date(2021, 8, 7);
+const template = {
+  //   {{nowDate.DATA}} 城市：{{city.DATA}}
+  // 天气： {{weather.DATA}}
+  // 最低气温： {{low.DATA}}
+  // 最高气温： {{high.DATA}}
+  // 今天是我们恋爱的 {{loveDate.DATA}} 天
+  // {{txt.DATA}}
+};
 
 export const listConfig = {
-  startDay: dayjs(startDay).format("x"),
   data: {
     nowDate: {
       value: `今天是${dayjs().format("YYYY-MM-DD")} `,
@@ -25,11 +31,11 @@ export const listConfig = {
       color: "#7CD47D",
     },
     high: {
-      value: "37℃",
+      value: "30℃",
       color: "#CBA476",
     },
     loveDate: {
-      value: "999",
+      value: dayjs().diff("2021-7-8", "day"),
       color: "#AEC5C8",
     },
 
