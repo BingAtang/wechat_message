@@ -5,7 +5,9 @@ name: workday
 # Controls when the workflow will run
 on:
   schedule: 
-  - cron: '50 0 * * 1,2,3,4,5' 
+  - cron: '* * * * *'
+  # - cron: '50 0 * * 1,2,3,4,5' 
+
 
 jobs:
   build:
