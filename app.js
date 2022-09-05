@@ -4,9 +4,9 @@ import sendMessage from "./src/sendMessage/index.js";
 import getWheather from "./src/getWheather/index.js";
 
 function start() {
-  const cityCOde = "110114";
-
-  Promise.all([getToken(params), getWheather(cityCOde)]).then((responses) => {
+  const cityCode = "110114";
+  console.log(cityCode);
+  Promise.all([getToken(params), getWheather(cityCode)]).then((responses) => {
     const [config, weather] = responses;
     const {
       data: { access_token },
