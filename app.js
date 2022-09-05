@@ -1,24 +1,26 @@
-import { params, listConfig } from "./src/config/index.js";
+import { params, getListConfig } from "./src/config/index.js";
 import getToken from "./src/getToken/index.js";
 import sendMessage from "./src/sendMessage/index.js";
+import getWheather from "./src/getWheather/index.js";
 
-async function start() {
-  const { data } = await getToken(params);
+function start() {
+  const cityCOde = "110114";
 
-  if (!data) {
-    console.log("!data");
-    return;
-  }
-  // console.log(listConfig.startDay);
-  const { access_token } = data;
-  const msgResponse = await sendMessage({
-    ...params,
-    access_token,
-    ...listConfig,
+  Promise.all([getToken(params), getWheather(cityCOde)]).then((responses) => {
+    const [config, weather] = responses;
+    const {
+      data: { access_token },
+    } = config;
+    const listConfig = getListConfig(weather, "北京");
+    console.log(weather);
+    sendMessage({
+      ...params,
+      access_token,
+      listConfig,
+    }).then(({ data }) => {
+      console.log({ data });
+    });
   });
-  if (msgResponse) {
-    console.log(msgResponse);
-  }
 }
 
 start();
