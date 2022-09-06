@@ -11,23 +11,36 @@ export const params = {
 };
 
 export const getListConfig = ({ daytemp, nighttemp, week, dayweather, nightweather }, city) => {
+  // TODO: 天气转义。暂定如此，后续转为对象的k-v模式，根据接口返回的天气现象获取对应的textvalue
   const weathertext = (text) => {
     switch (text) {
       case "晴":
         return "晴空万里";
+      case "阴":
+        return "miu太阳啦";
+      case "多云":
+        return "云层厚厚";
+      case "雨":
+        return "要下雨咯";
       default:
         return text;
     }
   };
-
+  // 天气一样时修改文案
   const weatherInfo =
     dayweather === nightweather
       ? `一整天都${weathertext(dayweather)}`
       : `白天${weathertext(dayweather)}，晚上${weathertext(nightweather)}`;
 
+  // 星期转化为汉字
+  const weekList = { 1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "日" };
+
+  //小提醒模块，目前只会根据天气给与提醒
+  const littleTips = () => {};
+
   const data = {
     nowDate: {
-      value: `今天是${dayjs().format("YYYY-MM-DD")}，星期${week}`,
+      value: `今天是${dayjs().format("YYYY-MM-DD")}，星期${weekList[week]}`,
       color: "#57E6E2",
     },
 
@@ -37,7 +50,7 @@ export const getListConfig = ({ daytemp, nighttemp, week, dayweather, nightweath
     },
 
     tips: {
-      value: "这是一条温馨小提醒，内容待完善",
+      value: "小提醒开发中...",
     },
 
     low: {
