@@ -6,7 +6,7 @@ const taotao = "ozIIy6alpmO2vvsAmNTP-y00fBSE";
 export const params = {
   appid: "wxc988a48df4f1fc38",
   secret: "4b959257ce9eaaff96f0d2440cc13c20",
-  touser: zhazha,
+  touser: taotao,
   template_id: "V9_8Zc0p1t0GsvjHEhryUUvdTYM2c85V0rKl8HdDRp8",
 };
 
