@@ -3,14 +3,20 @@ import dayjs from 'dayjs';
 const zhazha = 'ozIIy6bivVnfJ0e1ydJGDWZZ3gZU';
 const taotao = 'ozIIy6alpmO2vvsAmNTP-y00fBSE';
 
-export const params = {
+export const myWifeInfo = {
   appid: 'wxc988a48df4f1fc38',
   secret: '4b959257ce9eaaff96f0d2440cc13c20',
   touser: taotao,
   template_id: 'V9_8Zc0p1t0GsvjHEhryUUvdTYM2c85V0rKl8HdDRp8',
 };
+export const myInfo = {
+  appid: 'wxc988a48df4f1fc38',
+  secret: '4b959257ce9eaaff96f0d2440cc13c20',
+  touser: 'ozIIy6bivVnfJ0e1ydJGDWZZ3gZU',
+  template_id: 'L2GhQhwz66BoWNtpaeCGkitAM8gvFezFQ5a3JpaNGgQ',
+};
 
-export const getListConfig = (
+export const getListConfigForWife = (
   { daytemp, nighttemp, week, dayweather, nightweather },
   city,
   dailyQuto
@@ -42,7 +48,7 @@ export const getListConfig = (
   //小提醒模块，目前只会根据天气给与提醒
   const littleTips = () => {};
 
-  const data = {
+  const dailyData = {
     nowDate: {
       value: `今天是${dayjs().format('YYYY-MM-DD')}，星期${weekList[week]}`,
       color: '#57E6E2',
@@ -74,6 +80,22 @@ export const getListConfig = (
       color: '#3C4244',
     },
   };
+  return dailyData;
+};
 
+export const getReportList = (reportType, errorType, errorInfo) => {
+  const data = {
+    reportData: {
+      value: reportType,
+      color: reportType === 'success' ? '#1ba784' : '#ed5a65',
+    },
+    errorType: {
+      value: errorType,
+      color: '#fbcd31',
+    },
+    errorInfo: {
+      value: errorInfo,
+    },
+  };
   return data;
 };
