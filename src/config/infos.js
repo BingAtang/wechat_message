@@ -94,7 +94,7 @@ export const getReportList = (reportType, errorType, errorInfo) => {
       color: '#fbcd31',
     },
     errorInfo: {
-      value: errorInfo,
+      value: JSON.stringify(errorInfo),
     },
   };
   return data;
