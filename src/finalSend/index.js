@@ -16,18 +16,22 @@ const cityInfos = {
 };
 
 export const sendDailyMsgToWife = async () => {
-  const token = await getToken(myWifeInfo);
-  const weather = await getWheather(cityInfos.ZhengZhou.code);
-  const dailyQuto = await getDailyQuto();
+  try {
+    const token = await getToken(myWifeInfo);
+    const weather = await getWheather(cityInfos.ZhengZhou.code);
+    const dailyQuto = await getDailyQuto();
 
-  const listConfig = getListConfigForWife(weather, cityInfos.ZhengZhou.name, dailyQuto);
-  const res = await sendMessage({
-    ...myWifeInfo,
-    token,
-    listConfig,
-  });
-  console.log(res);
-  return res;
+    const listConfig = getListConfigForWife(weather, cityInfos.ZhengZhou.name, dailyQuto);
+    const res = await sendMessage({
+      ...myWifeInfo,
+      token,
+      listConfig,
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const sendReportToMe = async (result, errorType, errorInfo) => {
