@@ -1,10 +1,11 @@
 import axios from 'axios';
+import dayjs from 'dayjs';
 import { sendReportToMe } from '../finalSend/index.js';
 
 const service = axios.create({
-  timeout: 5000,
+  timeout: 600000,
   retry: 5,
-  retryDelay: 1000,
+  retryDelay: 10000,
   __retryCount: 0,
 });
 
@@ -54,7 +55,9 @@ service.interceptors.response.use(
       // 延迟时间到后重新发起请求
       return backoff.then(() => {
         config.__retryCount++;
-        console.log(`============第${config.__retryCount}次重发==============`);
+        console.log(
+          `============第${config.__retryCount}次重发, 时间: ${dayjs().format()}==============`
+        );
         return service(config);
       });
     }

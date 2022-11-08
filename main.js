@@ -6,7 +6,7 @@ const start = () => {
       sendReportToMe('success');
     })
     .catch((error) => {
-      console.log('发消息接收到的error:', error.code);
+      console.log('发消息接收到的error:', error);
       sendReportToMe('error', '消息发送失败', error);
     });
 };

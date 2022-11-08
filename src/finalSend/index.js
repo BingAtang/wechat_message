@@ -3,6 +3,7 @@ import getDailyQuto from '../utils/getDailyQuto.js';
 import getToken from '../utils/getToken.js';
 import getWheather from '../utils/getWheather.js';
 import sendMessage from '../utils/sendMsg.js';
+import dayjs from 'dayjs';
 
 const cityInfos = {
   ZhengZhou: {
@@ -18,7 +19,9 @@ const cityInfos = {
 export const sendDailyMsgToWife = async () => {
   try {
     const token = await getToken(myWifeInfo);
+    console.log(`${dayjs().format()}， 开始请求高德接口`);
     const weather = await getWheather(cityInfos.ZhengZhou.code);
+    console.log(`${dayjs().format()}， 请求高德接口结束`);
     const dailyQuto = await getDailyQuto();
 
     const listConfig = getListConfigForWife(weather, cityInfos.ZhengZhou.name, dailyQuto);
