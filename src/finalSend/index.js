@@ -14,17 +14,22 @@ const cityInfos = {
     name: '北京',
     code: '110114',
   },
+  Longhua: {
+    name: '隆化',
+    code: '130825',
+  },
 };
 
 export const sendDailyMsgToWife = async () => {
+  const { name, code } = cityInfos.Longhua;
   try {
     const token = await getToken(myWifeInfo);
     console.log(`${dayjs().format()}， 开始请求高德接口`);
-    const weather = await getWheather(cityInfos.ZhengZhou.code);
+    const weather = await getWheather(code);
     console.log(`${dayjs().format()}， 请求高德接口结束`);
     const dailyQuto = await getDailyQuto();
 
-    const listConfig = getListConfigForWife(weather, cityInfos.ZhengZhou.name, dailyQuto);
+    const listConfig = getListConfigForWife(weather, name, dailyQuto);
     const res = await sendMessage({
       ...myWifeInfo,
       token,
