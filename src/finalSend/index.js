@@ -21,7 +21,7 @@ const cityInfos = {
 };
 
 export const sendDailyMsgToWife = async () => {
-  const { name, code } = cityInfos.Longhua;
+  const { name, code } = cityInfos.beijing;
   try {
     const token = await getToken(myWifeInfo);
     console.log(`${dayjs().format()}， 开始请求高德接口`);
